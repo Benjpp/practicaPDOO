@@ -1,10 +1,13 @@
-public class shield {
+package equipment;
+
+public class Shield {
 
     private float protection;
     private int uses;
 
-    public shield (int protection, int uses){
-
+    public Shield (int protection, int uses){
+    	this.protection = protection;
+    	this.uses = uses;
     }
 
     private float getProtection(){
@@ -26,5 +29,9 @@ public class shield {
     public String toString(){
         return "S[" + this.protection + ", " + this.uses + "]";
     }
-
+    
+    public boolean discard() {
+    	return Dice.discardElement(this.uses);
+    }
+    
 }

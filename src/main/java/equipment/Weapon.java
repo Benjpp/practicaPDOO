@@ -1,9 +1,12 @@
+package equipment;
 
-public class weapon {
+
+public class Weapon {
     private float power;
     private int uses;
-    public weapon (float power, int uses){
-
+    public Weapon (float power, int uses){
+    	this.power = power;
+    	this.uses = uses;
     }
 
     private float getPower(){
@@ -26,5 +29,9 @@ public class weapon {
     public String toString(){
         return "W[" + this.power + ", " + this.uses + "]";
     }
-
+    
+    public boolean discard() {
+    	return Dice.discardElement(this.uses);
+    }
+    
 }
