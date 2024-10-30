@@ -1,5 +1,9 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import equipment.Dice;
 import equipment.Shield;
 import equipment.Weapon;
 import irrgartenEnums.Directions;
@@ -23,34 +27,48 @@ public class Player {
 				col,
 				consecutiveHits = 0;
 	
+	private List<Weapon> weapons;
+
+	private List<Shield> shields;
+	
 	public Player(char number, float intelligence, float strength) {
 		this.intelligence = intelligence;
 		this.number = number;
 		this.strength = strength;
+		this.weapons = new ArrayList<Weapon>();
+		this.shields = new ArrayList<Shield>();
 	}
 	
 	public void resurrect() {
-		
-	}
-	
-	public int getRow() {
-		
-	}
-	
-	public int getCol() {
-		
-	}
-	
-	public char getNumber() {
-		
+		if(Dice.resurrectPlayer()) {
+			
+			this.health = initialHealth;
+			this.weapons = new ArrayList<Weapon>();
+			this.shields = new ArrayList<Shield>();
+			this.resetHits();
+			
+		}
 	}
 	
 	public void setPos(int row, int col) {
-		
+		this.row = row;
+		this.col = col;
+	}
+	
+	public int getRow() {
+		return this.row;
+	}
+	
+	public int getCol() {
+		return this.col;
+	}
+	
+	public char getNumber() {
+		return this.number;
 	}
 	
 	public boolean dead() {
-		
+		return this.health == 0;
 	}
 	
 	public Directions move(Directions direction, Directions[] validMoves) {
@@ -58,7 +76,7 @@ public class Player {
 	}
 	
 	public float attack() {
-		
+		return this.strength + this.sumWeapons();
 	}
 	
 	public boolean defend(float receivedAttack) {
@@ -71,7 +89,7 @@ public class Player {
 	
 	@Override
 	public String toString() {
-		
+		return this.name + "| HP: " + this.health + "| Intellect: " + this.intelligence + "| Strength: " +this.strength;
 	}
 	
 	private void receiveWeapon(Weapon w) {
@@ -83,23 +101,35 @@ public class Player {
 	}
 	
 	private Weapon newWeapon() {
-		
+		return new Weapon(Dice.weaponPower(), Dice.usesLeft());
 	}
 	
 	private Shield newShield() {
-		
+		return new Shield(Dice.shieldPower(), Dice.usesLeft());
 	}
 	
 	private float sumWeapons() {
-		
+		float suma = 0;
+		for (Weapon w : this.weapons) {
+			
+			suma += w.attack();
+			
+		}
+		return suma;
 	}
 	
 	private float sumShields() {
-		
+		float sum = 0;
+		for(Shield s : this.shields) {
+			
+			sum += s.protect();
+			
+		}
+		return sum;
 	}
 	
 	private float defensiveEnergy() {
-		
+		return this.intelligence + this.sumShields();
 	}
 	
 	private boolean manageHit(float receivedAttack) {
@@ -107,14 +137,15 @@ public class Player {
 	}
 	
 	private void resetHits() {
-		
+		this.consecutiveHits ^= this.consecutiveHits;
 	}
 	
 	private void gotWounded() {
-		
+		this.health--;
 	}
 	
 	private void incConsecutive() {
-		
+		this.consecutiveHits++;
 	}
+	
 }

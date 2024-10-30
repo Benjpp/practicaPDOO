@@ -5,7 +5,7 @@ public class Shield {
     private float protection;
     private int uses;
 
-    public Shield (int protection, int uses){
+    public Shield (float protection, int uses){
     	this.protection = protection;
     	this.uses = uses;
     }
