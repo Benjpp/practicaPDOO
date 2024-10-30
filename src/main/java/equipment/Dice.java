@@ -32,11 +32,11 @@ public class Dice {
 	    return generator.nextInt(0, nPlayers);
 	}
 
-	public static float maxIntelligence (){
+	public static float randomIntelligence (){
 	    return generator.nextFloat(0, maxIntelligence);
 	}
 
-	public static float maxStrength (){
+	public static float randomStrength (){
 	    return generator.nextFloat(0, maxStrength);
 	}
 

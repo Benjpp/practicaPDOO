@@ -1,5 +1,6 @@
 package tests;
 
+import equipment.Dice;
 import equipment.Shield;
 import equipment.Weapon;
 
@@ -30,9 +31,64 @@ public class TestP1 {
         String discardPistola = pistola.discard()? "He descartado el escudo de madera" : "No he descartado el escudo de madera";
         String discardNavaja = navaja.discard()? "He descartado el escudo de hierro" : "No he descartado el escudo de hierro";
         System.out.println(discardPistola + " y " + discardNavaja);
-
         
-
-
+        //Probando dado
+       
+        for(int i = 101; i > 1; i--) {
+        	String discardElement = Dice.discardElement(i)? "Elemento descartado" : "Elemento no descartado";
+        	System.out.println("Probando discardElement(usesLeft): " + discardElement + " para " + Integer.toString(i) + " usos");
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	System.out.println("Probando healthReward(): " + Integer.toString(Dice.healthReward()));
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	System.out.println("Probando intensity(float competence): " + Float.toString(Dice.intensity(i)));
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	System.out.println("Probando randomIntelligence(): " + Float.toString(Dice.randomIntelligence()));
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	System.out.println("Probando randomStrength(): " +Float.toString(Dice.randomStrength()));
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	System.out.println("Probando randomPos(int max): " + Integer.toString(Dice.randomPos(i)));
+        }
+        
+        for(int i = 1;i < 101; i++) {
+        	System.out.println("Probando shieldPower(): " + Float.toString(Dice.shieldPower()));
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	System.out.println("Probando shieldsReward(): " +Integer.toString(Dice.shieldsReward()));
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	System.out.println("Probando usesLeft(): " +Integer.toString(Dice.usesLeft()));
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	System.out.println("Probando weaponPower(): " + Float.toString(Dice.weaponPower()));
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	System.out.println("Probando weaponsReward(): " +Integer.toString(Dice.weaponsReward()));
+        }
+        
+        for(int i = 1; i < 101; i++) {
+        	String resurrectPlayer = Dice.resurrectPlayer()? "Jugador ha sido resucitado" : "Jugador no ha sido resucitado";
+        	System.out.println("Probando ressurectPlayer(): " + resurrectPlayer);
+        }
+        
+        int nPlayers = 10;
+        for(int i = 1; i < 101; i++) {
+        	
+        	System.out.println("Probando whoStart(nPlayers)" + Integer.toString(Dice.whoStart(nPlayers)));
+        }
+        
     }
 }
