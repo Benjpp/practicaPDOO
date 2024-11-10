@@ -1,6 +1,4 @@
-package entities;
-
-import equipment.Dice;
+package Irrgarten;
 
 public class Monster {
 	private int row,col;

@@ -1,5 +1,4 @@
-package equipment;
-
+package Irrgarten;
 
 public class Weapon {
     private float power;

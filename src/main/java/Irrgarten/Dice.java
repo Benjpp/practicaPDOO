@@ -1,4 +1,4 @@
-package equipment;
+package Irrgarten;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package equipment;
+package Irrgarten;
 
 public class Shield {
 

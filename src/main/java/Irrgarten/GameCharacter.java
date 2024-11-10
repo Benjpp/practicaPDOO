@@ -1,4 +1,4 @@
-package irrgartenEnums;
+package Irrgarten;
 
 public enum GameCharacter {
     player, monster

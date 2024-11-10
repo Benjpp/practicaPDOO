@@ -1,12 +1,7 @@
-package entities;
+package Irrgarten;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import equipment.Dice;
-import equipment.Shield;
-import equipment.Weapon;
-import irrgartenEnums.Directions;
 
 public class Player {
 	private static int 
@@ -137,7 +132,7 @@ public class Player {
 	}
 	
 	private void resetHits() {
-		this.consecutiveHits ^= this.consecutiveHits;
+		this.consecutiveHits = 0;
 	}
 	
 	private void gotWounded() {
