@@ -24,7 +24,7 @@ public class Game {
 	private List<Monster> monstruos;
 	
 	public Game(int nplayers) {
-		this.log = null;
+		this.log = "";
 		this.jugadores = new ArrayList<>();
 		this.monstruos = new ArrayList<>();
 		for (int i = 0; i < nplayers; i++) {
@@ -96,26 +96,31 @@ public class Game {
 	}
 	
 	private void logPlayerWon() {
-		
+		this.log += "Jugador " + this.currentPlayerIndex + " ha ganado el combate \n";
+	}
+	
+	private void logMonsterWon() {
+		this.log += "El monstruo ha ganado contra el jugador " + this.currentPlayerIndex + "\n";
 	}
 	
 	private void logResurrected() {
-		
+		this.log += "El jugador " + this.currentPlayerIndex+ " ha sido resucitado\n";
 	}
 	
 	private void logPlayerSkipTurn() {
-		
+		this.log += "El jugador  " + this.currentPlayerIndex + "no puede usar su turno, está muerto\n";
 	}
 	
 	private void logPlayerNoOrders() {
-		
+		this.log += "El jugador " + this.currentPlayerIndex + " no ha seguido las intstrucciones del"
+				+ " jugador humano\n";
 	}
 	
 	private void logNoMonster() {
-		
+		this.log += "El jugador " + this.currentPlayerIndex + "r se ha movido a una celda vacía o no le ha sido posible moverse\n";
 	}
 	
 	private void logRounds(int rounds, int max) {
-		
+		this.log += "Se han producido ya " + rounds + " de " + max + " rondas";
 	}
 }
