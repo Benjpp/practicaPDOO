@@ -66,8 +66,14 @@ public class Player {
 		return this.health == 0;
 	}
 	
-	public Directions move(Directions direction, Directions[] validMoves) {
-		
+	public Directions move(Directions direction, ArrayList<Directions> validMoves) {
+		int size = validMoves.size();
+		boolean contained = validMoves.contains(direction);
+		if(size > 0 && !contained) {
+			Directions firstElement = validMoves.get(0);
+			return firstElement;
+		}
+		return direction;
 	}
 	
 	public float attack() {
@@ -75,11 +81,22 @@ public class Player {
 	}
 	
 	public boolean defend(float receivedAttack) {
-		
+		return this.manageHit(receivedAttack);
 	}
 	
 	public void receiveReward() {
-		
+		int wReward = Dice.weaponsReward();
+		int sReward = Dice.shieldsReward();
+		for(int i = 1; i <= wReward; i++) {
+			Weapon wnew = new Weapon(Dice.weaponPower(), Dice.usesLeft());
+			this.receiveWeapon(wnew);
+		}
+		for(int i = 1; i <= sReward; i++){
+			Shield snew = new Shield(Dice.shieldPower(), Dice.usesLeft());
+			this.receiveShield(snew);
+		}
+		int extraHealth = Dice.healthReward();
+		this.health += extraHealth;
 	}
 	
 	@Override
@@ -88,11 +105,25 @@ public class Player {
 	}
 	
 	private void receiveWeapon(Weapon w) {
-		
+		for(int i = 0; i < this.weapons.size() - 1; i++) {
+			if(this.weapons.get(i).discard()) {
+				this.weapons.remove(i);
+			}
+		}
+		if(this.weapons.size()<maxWeapons) {
+			this.weapons.add(w);
+		}
 	}
 	
 	private void receiveShield(Shield s) {
-		
+		for(int i = 0; i < this.shields.size() - 1; i++) {
+			if(this.shields.get(i).discard()) {
+				this.shields.remove(i);
+			}
+		}
+		if(this.shields.size()<maxShields) {
+			this.shields.add(s);
+		}
 	}
 	
 	private Weapon newWeapon() {
@@ -128,7 +159,21 @@ public class Player {
 	}
 	
 	private boolean manageHit(float receivedAttack) {
-		
+		boolean lose;
+		float defense  = this.defensiveEnergy();
+		if(defense < receivedAttack) {
+			this.gotWounded();
+			this.incConsecutiveHits();
+		}else {
+			this.resetHits();
+		}
+		if(this.consecutiveHits == hits2Lose || this.dead()) {
+			this.resetHits();
+			lose=true;
+		}else {
+			lose=false;
+		}
+		return lose;
 	}
 	
 	private void resetHits() {
@@ -139,7 +184,7 @@ public class Player {
 		this.health--;
 	}
 	
-	private void incConsecutive() {
+	private void incConsecutiveHits() {
 		this.consecutiveHits++;
 	}
 	
