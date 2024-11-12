@@ -66,7 +66,7 @@ public class Player {
 		return this.health == 0;
 	}
 	
-	public Directions move(Directions direction, ArrayList<Directions> validMoves) {
+	public Directions move(Directions direction, List<Directions> validMoves) {
 		int size = validMoves.size();
 		boolean contained = validMoves.contains(direction);
 		if(size > 0 && !contained) {

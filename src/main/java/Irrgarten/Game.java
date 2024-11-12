@@ -41,7 +41,27 @@ public class Game {
 	}
 	
 	public boolean nextStep(Directions preferredDirection) {
-		
+		boolean dead = currentPlayer.dead();
+		if(!dead) {
+			Directions direction = this.actualDirection(preferredDirection);
+			if(direction != preferredDirection) {
+				this.logPlayerNoOrders();
+			}
+			Monster monster = this.labyrinth.putPlayer(direction, currentPlayer);
+			if(monster == null) {
+				this.logNoMonster();
+			}else {
+				GameCharacter winner = this.combat(monster);
+				this.manageReward(winner);
+			}
+		}else {
+			this.manageResurrection();
+		}
+		boolean endGame = this.finished();
+		if(!endGame) {
+			this.nextPlayer();
+		}
+		return endGame;
 	}
 	
 	public GameState getGameState() {
@@ -80,19 +100,50 @@ public class Game {
 	}
 	
 	private Directions actualDirection(Directions preferredDirection) {
-		
+		int currentRow = this.currentPlayer.getRow();
+		int currentCol = this.currentPlayer.getCol();
+		List<Directions> validMoves = new ArrayList<>();
+		validMoves = this.labyrinth.validMoves(currentRow, currentCol);
+		return this.currentPlayer.move(preferredDirection,validMoves);
 	}
 	
 	private GameCharacter combat(Monster monster) {
-		
+		int rounds = 0;
+		GameCharacter winner = GameCharacter.player;
+		float playerAttack = this.currentPlayer.attack();
+		boolean lose = monster.defend(playerAttack);
+		while(!lose && rounds < MAX_ROUNDS) {
+			winner = GameCharacter.monster;
+			rounds++;
+			float monsterAttack = monster.attack();
+			lose = this.currentPlayer.defend(monsterAttack);
+			if(!lose) {
+				playerAttack = this.currentPlayer.attack();
+				winner = GameCharacter.player;
+				lose = monster.defend(playerAttack);
+			}
+		}
+		this.logRounds(rounds, MAX_ROUNDS);
+		return winner;
 	}
 	
 	private void manageReward(GameCharacter winner) {
-		
+		if(winner == GameCharacter.player) {
+			this.currentPlayer.receiveReward();
+			this.logPlayerWon();
+		}else {
+			this.logMonsterWon();
+		}
 	}
 	
 	private void manageResurrection() {
-		
+		boolean resurrect = Dice.resurrectPlayer();
+		if(resurrect) {
+			this.currentPlayer.resurrect();
+			this.logResurrected();
+		}else {
+			this.logPlayerSkipTurn();
+		}
 	}
 	
 	private void logPlayerWon() {
