@@ -1,4 +1,4 @@
-package Irrgarten;
+package irrgarten;
 
 public class GameState {
 	private String labyrinth;

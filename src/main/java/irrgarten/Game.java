@@ -1,4 +1,4 @@
-package Irrgarten;
+package irrgarten;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class Game {
 		currentPlayerIndex = Dice.whoStart(nplayers);
 		this.labyrinth = new Labyrinth(nRows,nCols,exitRow,exitCol);
 		this.configureLbayrinth();
-		this.labyrinth.spreadPlayers(null);
+		this.labyrinth.spreadPlayers(this.jugadores);
 	}
 	
 	public boolean finished() {

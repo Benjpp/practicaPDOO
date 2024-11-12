@@ -1,9 +1,9 @@
 package tests;
 
-import Irrgarten.Dice;
-import Irrgarten.GameState;
-import Irrgarten.Shield;
-import Irrgarten.Weapon;
+import irrgarten.Dice;
+import irrgarten.GameState;
+import irrgarten.Shield;
+import irrgarten.Weapon;
 
 public class TestP1 {
     public static void main(String[] args) {

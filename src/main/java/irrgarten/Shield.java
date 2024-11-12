@@ -1,4 +1,4 @@
-package Irrgarten;
+package irrgarten;
 
 public class Shield {
 

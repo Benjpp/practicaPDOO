@@ -1,4 +1,4 @@
-package Irrgarten;
+package irrgarten;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class Labyrinth {
 		this.players = new Player[nRows][nCols];
 		
 		for(int i = 0; i < nRows; i++) {
-			for(int j = 0; j < nCols; i++) {
+			for(int j = 0; j < nCols; j++) {
 				if((j == 0) || (j == nCols - 1)) {
 					this.labyrinth[i][j] = BLOCK_CHAR;
 				}
@@ -76,8 +76,8 @@ public class Labyrinth {
 		}
 	}
 	
-	public void spreadPlayers(ArrayList<Player> players) {
-		for(Player p: players) {
+	public void spreadPlayers(List<Player> jugadores) {
+		for(Player p: jugadores) {
 			int[] pos = this.randomEmptyPos();
 			this.putPlayer2D(-1, -1, pos[0], pos[1], p);
 		}
@@ -118,16 +118,16 @@ public class Labyrinth {
 	public List<Directions> validMoves(int row, int col) {
 		List<Directions> output = new ArrayList<>();
 		if(this.canStepOn(row + 1, col)) {
-			output.add(Directions.down);
+			output.add(Directions.DOWN);
 		}
 		if(this.canStepOn(row - 1, col)) {
-			output.add(Directions.up);
+			output.add(Directions.UP);
 		}
 		if(this.canStepOn(row, col + 1)) {
-			output.add(Directions.right);
+			output.add(Directions.RIGHT);
 		}
 		if(this.canStepOn(row, col - 1)) {
-			output.add(Directions.left);
+			output.add(Directions.LEFT);
 		}
 		return output;
 	}
@@ -171,22 +171,22 @@ public class Labyrinth {
 	private int[] dir2Pos(int row, int col, Directions direction) {
 		int[] newDir = new int[2];
 		switch (direction) {
-		case left:
+		case LEFT:
 			newDir[0] = row - 1;
 			newDir[1] = col;
 			break;
 		
-		case right:
+		case RIGHT:
 			newDir[0] = row + 1;
 			newDir[1] = col;
 			break;
 			
-		case up:
+		case UP:
 			newDir[0] = row;
 			newDir[1] = col + 1;
 			break;
 			
-		case down:
+		case DOWN:
 			newDir[0] = row;
 			newDir[1] = col - 1;
 			break;

@@ -1,4 +1,4 @@
-package Irrgarten;
+package irrgarten;
 
 import java.util.ArrayList;
 import java.util.List;
