@@ -68,7 +68,15 @@ public class Player {
 	
 	public Directions move(Directions direction, List<Directions> validMoves) {
 		int size = validMoves.size();
-		boolean contained = validMoves.contains(direction);
+		boolean contained = false;
+		int contador = 0;
+		while(!contained && contador < validMoves.size()) {
+			if(validMoves.get(contador) == direction) {
+				contained = true;
+			}
+			contador++;
+			
+		}
 		if(size > 0 && !contained) {
 			Directions firstElement = validMoves.get(0);
 			return firstElement;

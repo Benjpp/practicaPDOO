@@ -91,5 +91,7 @@ public class TestP1 {
         	System.out.println("Probando whoStart(nPlayers)" + Integer.toString(Dice.whoStart(nPlayers)));
         }
         
+        
+        
     }
 }

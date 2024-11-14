@@ -44,6 +44,8 @@ public class Labyrinth {
 			for(int j = 0; j < nCols; j++) {
 				if((j == 0) || (j == nCols - 1)) {
 					this.labyrinth[i][j] = BLOCK_CHAR;
+				}else {
+					this.labyrinth[i][j] = EMPTY_CHAR;
 				}
 			}
 		}
@@ -63,7 +65,7 @@ public class Labyrinth {
 		String lab = "";
 		for(int i = 0; i < nRows; i++) {
 			for (int j = 0; j < nCols; j++) {
-				lab += this.labyrinth[i][j] +"|"; 
+				lab += this.labyrinth[i][j]; 
 			}
 			lab += "\n";
 		}
@@ -79,7 +81,7 @@ public class Labyrinth {
 	public void spreadPlayers(List<Player> jugadores) {
 		for(Player p: jugadores) {
 			int[] pos = this.randomEmptyPos();
-			this.putPlayer2D(-1, -1, pos[0], pos[1], p);
+			this.putPlayer2D(p.getRow(),p.getCol() , pos[0], pos[1], p);
 		}
 	}
 	

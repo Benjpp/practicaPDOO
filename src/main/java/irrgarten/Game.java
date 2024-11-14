@@ -31,13 +31,19 @@ public class Game {
 			this.jugadores.add(new Player(Integer.toString(i).charAt(0),Dice.randomIntelligence(), Dice.randomStrength()));
 		}
 		currentPlayerIndex = Dice.whoStart(nplayers);
+		currentPlayer = this.jugadores.get(currentPlayerIndex);
 		this.labyrinth = new Labyrinth(nRows,nCols,exitRow,exitCol);
 		this.configureLbayrinth();
 		this.labyrinth.spreadPlayers(this.jugadores);
+
 	}
 	
 	public boolean finished() {
 		return this.labyrinth.haveAWinner();
+	}
+	
+	public int getCurrentPlayerIndex() {
+		return this.currentPlayerIndex;
 	}
 	
 	public boolean nextStep(Directions preferredDirection) {
@@ -77,9 +83,7 @@ public class Game {
 	}
 	
 	private void configureLbayrinth() {
-		labyrinth.addBlock(Orientation.vertical, 3, 5, 5);
-        labyrinth.addBlock(Orientation.vertical, 1, 2, 7);
-        labyrinth.addBlock(Orientation.horizontal, 5, 3, 1);
+		labyrinth.addBlock(Orientation.vertical, 1, 1, 5);
         //int newpos[] = labyrinth.randomEmptyPos();
         int newpos1[] = {4,4};
         Monster monstruo1 = new Monster ("monstruo1", Dice.randomIntelligence(), Dice.randomStrength());
